@@ -43,3 +43,8 @@ jobs:
           name: $CONTAINER_ARCHIVE
       - name: Expand image
         run: docker load -i $CONTAINER_ARCHIVE
+      - name: Run test.sh
+        run: |
+          docker cp test.sh
+          docker cp $CONTAINER:/root/test.sh
+          docker exec -w=/root/ -it $CONTAINER /root/test.sh
