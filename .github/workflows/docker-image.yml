@@ -27,3 +27,19 @@ jobs:
         name: $CONTAINER_ARCHIVE
         path: $CONTAINER_ARCHIVE
         if-no-files-found: error
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: 'https://github.com/hegza/riscv/'
+          ref: 'feat/rve'
+      - name: Download image
+        uses: actions/download-artifact@v4
+        with:
+          name: $CONTAINER_ARCHIVE
+      - name: Expand image
+        run: docker load -i $CONTAINER_ARCHIVE
