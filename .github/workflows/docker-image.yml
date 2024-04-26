@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build Docker image
       run: |
-        docker build . --file Containerfile --tag $CONTAINER
+        docker build . --file Containerfile --tag $CONTAINER --target minimal
         docker save $CONTAINER -o $CONTAINER_ARCHIVE
     - name: Upload image
       uses: actions/upload-artifact@v4
