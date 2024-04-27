@@ -8,6 +8,7 @@ RUN apt install -y git less
 
 # Requirements for RISC-V GCC
 RUN apt install -y autoconf automake build-essential curl python3 gawk bison flex texinfo gperf libtool patchutils bc expat wget
+# libmpc mpfr gmp base-devel zlib
 
 # Clone RISC-V GCC
 RUN git clone --depth=1 --branch 2024.02.02 https://github.com/riscv-collab/riscv-gnu-toolchain
