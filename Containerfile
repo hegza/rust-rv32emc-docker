@@ -13,11 +13,11 @@ RUN git clone --depth=1 --branch 2024.02.02 https://github.com/riscv-collab/risc
 # Build RISC-V cross-compiler
 WORKDIR /root/riscv-gnu-toolchain/
 ENV RISCV=/opt/riscv/
-RUN \
-  mkdir ${RISCV} && \
-  ./configure --prefix=${RISCV} --with-arch=rv32emc --with-abi=ilp32e
-RUN make
+RUN wget -q https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2024.02.02/riscv32-elf-ubuntu-22.04-llvm-nightly-2024.02.02-nightly.tar.gz
+RUN mkdir ${RISCV} && \
+  tar -xf riscv32-elf-ubuntu-22.04-llvm-nightly-2024.02.02-nightly.tar.gz --strip-components 1 -C /opt/riscv/
 ENV PATH="${RISCV}/bin:${PATH}"
+RUN riscv32-unknown-elf-gcc --version
 
 # Requirements for LLVM
 RUN pacman --noconfirm -Syy cmake ninja gcc python3
